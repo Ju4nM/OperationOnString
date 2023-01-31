@@ -1,0 +1,15 @@
+D:\Documentos\lab\csharp\test\bin\Debug\net6.0\test.exe
+D:\Documentos\lab\csharp\test\bin\Debug\net6.0\test.deps.json
+D:\Documentos\lab\csharp\test\bin\Debug\net6.0\test.runtimeconfig.json
+D:\Documentos\lab\csharp\test\bin\Debug\net6.0\test.dll
+D:\Documentos\lab\csharp\test\bin\Debug\net6.0\test.pdb
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.csproj.AssemblyReference.cache
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.AssemblyInfoInputs.cache
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.AssemblyInfo.cs
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.csproj.CoreCompileInputs.cache
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.dll
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\refint\test.dll
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.pdb
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\test.genruntimeconfig.cache
+D:\Documentos\lab\csharp\test\obj\Debug\net6.0\ref\test.dll
