@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-string input = "2+2x3";
+string input = "2x3/2+4-10";
 
 // ------------------------------------------------------------------------------
 
@@ -22,14 +22,6 @@ string FindOperation (string Operation, int Middle, int Left, int Right) {
         Left == 0 && Right == Operation.Length - 1)
          return Operation.Substring(Left, Right + 1);
 
-    /* if (IsSign(CharLeft) && IsSign(CharRight) ||  */
-    /*     IsSign(CharLeft) && NewRightIndex <= Operation.Length - 1 || */
-    /*     NewLeftIndex >= 0 && IsSign(CharRight) || */
-    /*     NewLeftIndex >= 0 && NewRightIndex <= Operation.Length - 1) */
-    /*     return Operation.Substring(Left, Right - 1); */
-   /* if (IsValidIndex(Operation, Right) && IsValidIndex(Operation, Left)) */
-
-
     if (!IsSign(CharLeft) && NewLeftIndex != Left && Left <= Middle) Left--;
     if (!IsSign(CharRight) && NewRightIndex != Right && Right >= Middle) Right++;
 
@@ -42,32 +34,33 @@ string DoOperation (string Operation, int Index) {
     string SubOperation = FindOperation(Operation, Index, Index, Index);
     string[] SubSplitted = SubOperation.Split(Sign);
     double Result = 0;
-    
     if (Sign == '+') Result = Convert.ToDouble(SubSplitted[0]) + Convert.ToDouble(SubSplitted[1]);
-    if (Sign == 'x') Result = Convert.ToDouble(SubSplitted[0]) * Convert.ToDouble(SubSplitted[1]);
-    if (Sign == '/') Result = Convert.ToDouble(SubSplitted[0]) / Convert.ToDouble(SubSplitted[1]);
-    if (Sign == '-') Result = Convert.ToDouble(SubSplitted[0]) - Convert.ToDouble(SubSplitted[1]);
+    else if (Sign == 'x') Result = Convert.ToDouble(SubSplitted[0]) * Convert.ToDouble(SubSplitted[1]);
+    else if (Sign == '/') Result = Convert.ToDouble(SubSplitted[0]) / Convert.ToDouble(SubSplitted[1]);
+    else if (Sign == '-') Result = Convert.ToDouble(SubSplitted[0]) - Convert.ToDouble(SubSplitted[1]);
     Operation = String.Join(Convert.ToString(Result), Operation.Split(SubOperation));
     return Operation;
 }
 
-string ResolveByPattern(string Operation, string Pattern) {
-    
-    Match HaveSign = Regex.Match(Operation, Pattern);
+bool IsNegativeResult (string Value) {
+    string[] ValueSplitted = Value.Split("-");
+    return ValueSplitted.Length == 2 && ValueSplitted[0] == "";
+}
 
-    if (!HaveSign.Success) return Operation;
-
-    int SignIndex = HaveSign.Index;
-    Operation = DoOperation(Operation, SignIndex);
+string ResolveByPattern(string Operation, string[] Signs, int IndexOfSign) {
     
-    return ResolveByPattern(Operation, Pattern);
+    if (IndexOfSign > Signs.Length - 1 || IsNegativeResult(Operation)) return Operation;
+    int SignIndex = Operation.IndexOf(Signs[IndexOfSign]);
+    if (SignIndex == -1) IndexOfSign++;
+    else Operation = DoOperation(Operation, SignIndex);
+    
+    return ResolveByPattern(Operation, Signs, IndexOfSign);
 }
 
 string SolveOperation (string Operation) {
 
-    Operation = ResolveByPattern(Operation, @"[\/x]");
-    Operation = ResolveByPattern(Operation, @"[\-\+]");
-
+    Operation = ResolveByPattern(Operation, new String[]{"/", "x"}, 0);
+    Operation = ResolveByPattern(Operation, new String[]{"+", "-"}, 0);
     return Operation; 
 }
 
